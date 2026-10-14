@@ -56,19 +56,17 @@ docs/psp/ (11 borradores PSP2)
 
 ## Integración continua
 
-El workflow oficial `Java CI` se ejecuta en push hacia `master` o `develop` y en pull request hacia `master`. Configura Temurin Java 21, usa caché Maven y ejecuta `mvn --batch-mode verify`. JaCoCo genera `target/site/jacoco/`, que se carga como artefacto `jacoco-report`, incluso si falla un paso anterior. La ejecución remota requiere publicar el repositorio en GitHub.
+El workflow oficial `Java CI` se ejecuta en push hacia `master` o `develop` y en pull request hacia `master`. Configura Temurin Java 21, usa caché Maven y ejecuta `mvn --batch-mode verify`. JaCoCo genera `target/site/jacoco/`, que se carga como artefacto `jacoco-report`, incluso si falla un paso anterior. Se confirmó la ejecución remota con resultado satisfactorio en ambas ramas y se descargó el artefacto desde GitHub Actions.
 
 ## Flujo de ramas y GitHub
 
-Este repositorio local se inicializó en `main`; aún no existe commit ni remoto. Tras crear un repositorio vacío en GitHub y confirmar su URL:
+El repositorio GitHub es `AdrianGil923/simpson-mvn`. La implementación se encuentra en `master` y `develop`; ambas ramas ejecutaron correctamente `Java CI`. La rama `master` está protegida para exigir pull request, una aprobación, el check `ci-cd`, que la rama esté actualizada y resolver conversaciones; no permite saltarse las reglas.
 
 ```sh
+git switch develop
 git add .
-git commit -m "Implement Student t integration with Simpson rule"
-git remote add origin <URL_CONFIRMADA>
-git push -u origin main
-git switch -c development
-git push -u origin development
+git commit -m "Document verified GitHub workflow and branch protection"
+git push origin develop
 ```
 
-Continúe cambios en `development`, haga commits y `git push`, y abra un pull request `development` → `main`. Espere el check `Build and test (Java 21)` en verde antes de fusionar. En GitHub: **Settings → Rules → Rulesets** (o **Branches → Add branch protection rule**), seleccione `main`, active exigir pull request antes de fusionar y exigir checks de estado, y marque `Build and test (Java 21)`. No se configuró protección ni se ejecutó Actions remotamente.
+Para abrir el pull request, seleccione `master` como base y `develop` como comparación. Espere que `Java CI / ci-cd` termine en verde antes de fusionar. La protección está configurada desde **Settings → Branches** con patrón `master`.
