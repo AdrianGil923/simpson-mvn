@@ -10,4 +10,4 @@ Comando ejecutado: `mvn clean verify`. Resultado Maven: **BUILD SUCCESS**, 5 tes
 | x=0 | 0 | Pasa |
 | Validaciones, convergencia y Gamma | Assertions JUnit | Pasa |
 
-Los resultados provienen de ejecución local; GitHub Actions todavía no se ejecutó.
+Los resultados anteriores provienen de ejecución local. Verificación remota posterior: workflow oficial `Java CI` pasó en `develop` (ejecución #1) y `master` (ejecución #2); el paso de carga de JaCoCo también terminó correctamente y dejó un artefacto. Se observó en la interfaz de GitHub el 14-10-2026. No se reporta aquí cobertura porcentual porque no se registró ese valor.
